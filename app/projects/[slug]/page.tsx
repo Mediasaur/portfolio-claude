@@ -1,23 +1,21 @@
-import { projects } from "@/data/projects";
-import { notFound } from "next/navigation";
+import { client } from "@/sanity/lib/client"
+import { projectBySlugQuery } from "@/sanity/lib/queries"
+import { notFound } from "next/navigation"
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  
   const { slug } = await params
-  
-  const project = projects.find((p) => p.slug === slug)
+  const project = await client.fetch(projectBySlugQuery, { slug })
 
-  if( !project ) {
-    notFound();
+  if (!project) {
+    notFound()
   }
 
   return (
     <div>
-      <h1>{ project.title }</h1>
-      <p>{ project.description }</p>
-      <p>{ project.tags.join(", ") }</p>
-      <a href={ project.url }>View Live</a>
+      <h1>{project.title}</h1>
+      <p>{project.description}</p>
+      <p>{project.tags?.join(", ")}</p>
+      <a href={project.url} target="_blank">View Live</a>
     </div>
   )
-
 }
