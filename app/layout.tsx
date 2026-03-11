@@ -28,8 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="bg-gray-300 p-3">
-          <nav className="flex gap-14">
+        <header className="p-4 border-b">
+          <nav className="flex gap-6">
             <Link href="/">Home</Link>
             <Link href="/projects">Projects</Link>
             <Link href="/contact">Contact</Link>
